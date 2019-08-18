@@ -84,7 +84,7 @@ export class ProductListComponent implements OnInit{
       set listFilter (value: string) {
           this._listFilter = value;
       };
-      applyFilter(): IProduct[] {
+      filteredProducts(): IProduct[] {
         if (this.filterOption === 'all') {
             return this.products;
         } else if (this.filterOption === 'name') {
@@ -99,4 +99,7 @@ export class ProductListComponent implements OnInit{
             return this.products.filter( product => product.starRating.toLocaleString().indexOf( this.listFilter ) !== -1 );
         }
     };
+    onRatingClicked(message: string): void {
+      this.pageTitle = 'Product List ' + message;
+    }
 }
