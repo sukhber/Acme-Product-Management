@@ -5,13 +5,23 @@
     <div class='card-body'>
         <div class='row'>
             <div class='col-md-2'>Filter by:</div>
+            <div class='col-md-3'>
+                <select [(ngModel)] = 'filterOption'>
+                    <option value = 'all'></option>
+                    <option value = 'name'>Product Name</option>
+                    <option value = 'code'>Code</option>
+                    <option value = 'availableDate'>Available Date</option>
+                    <option value = 'price'>Price</option>
+                    <option value = 'rating'>Rating</option>
+                </select>
+            </div>
             <div class='col-md-4'>
-                <input type='text' />
+                <input type='text' [(ngModel)] = 'listFilter'/>
             </div>
         </div>
         <div class='row'>
             <div class='col-md-6'>
-                <h4>Filtered by: </h4>
+                <h4>Filtered by: {{ filterOption | titlecase }}</h4>
             </div>
         </div>
         <div class='table-responsive'>
@@ -19,18 +29,31 @@
                 <thead>
                     <tr>
                         <th>
-                            <button class='btn btn-primary'>
-                                Show Image
+                            <button class='btn btn-primary' (click) = 'toggleImage()'>
+                                {{ buttonText }} 
                             </button>
                         </th>
                         <th>Product</th>
+                        <th>Code</th>
                         <th>Available</th>
                         <th>Price</th>
                         <th>5 Star Rating</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <tr *ngFor = 'let product of applyFilter()'>
+                        <td> 
+                            <img *ngIf = 'showImage'
+                                [src] = 'product.imageUrl' 
+                                [style.width.px] = 'imageWidth'
+                                [style.margin.px] = 'imageMargin' />
+                        </td>
+                        <td>{{ product.productName }}</td>
+                        <td>{{ product.productCode | lowercase | convertToSpaces : '-' }}</td>
+                        <td>{{ product.releaseDate }}</td>
+                        <td>{{ product.price | currency : USD : symbol : '1.2-2' }}</td>
+                        <td>{{ product.starRating }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
