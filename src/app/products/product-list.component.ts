@@ -3,7 +3,6 @@ import { IProduct } from './product';
 import { ProductService } from './product.service';
 
 @Component( {
-    selector: 'pm-products',
     templateUrl: './product-list.component.html',
     styleUrls: ['./product-list.component.css']
 }
@@ -14,8 +13,8 @@ export class ProductListComponent implements OnInit{
     imageWidth: number = 60;
     imageMargin: number = 5;
     _listFilter: string;
-    showImage: boolean = false;
-    buttonText: string = 'Show Image';
+    showImage: boolean = true;
+    buttonText: string = 'Hide Image';
     filterOption: string;
     ratingMessage: string;
     errorMessage: string;
