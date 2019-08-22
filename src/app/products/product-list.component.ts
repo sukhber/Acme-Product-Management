@@ -48,7 +48,7 @@ export class ProductListComponent implements OnInit{
       get filteredProducts (): IProduct[] {
 
         if (this.filterOption === 'all') {
-            this._filteredProducts = this.products;
+        this._filteredProducts = this.products;
        } else if (this.filterOption === 'name') {
         this._filteredProducts = this.products.filter( product => product.productName.toLocaleLowerCase().indexOf( this.listFilter.toLocaleLowerCase() ) !== -1 );
        } else if (this.filterOption === 'code') {
