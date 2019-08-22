@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { IProduct } from './product';
 import { ProductService } from './product.service';
+import { NgModel } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component( {
     templateUrl: './product-list.component.html',
@@ -8,24 +10,22 @@ import { ProductService } from './product.service';
 }
 
 )
-export class ProductListComponent implements OnInit, AfterViewInit{
+export class ProductListComponent implements OnInit {
     pageTitle: string = 'Product List ';
     imageWidth: number = 60;
     imageMargin: number = 5;
-    private _listFilter: string;
     showImage: boolean = true;
     buttonText: string = 'Hide Image';
     filterOption: string;
     ratingMessage: string;
     errorMessage: string;
     products: IProduct[];
-
-    @ViewChild('filterElement', {static: false}) filterElementReference: ElementRef;
-
+    listFilter: string;
       toggleImage(): void {
           this.showImage = !this.showImage;
           this.buttonText = this.showImage ? 'Hide Image' : 'Show Image';
       };
+
       ngOnInit(): void {
           this.productService.getProducts().subscribe( {
               next: products => {
@@ -36,15 +36,10 @@ export class ProductListComponent implements OnInit, AfterViewInit{
               } 
           } );
       };
+
       constructor(private productService: ProductService) {
-        this.filterOption = 'name';
         this.listFilter = '';
-      };
-      get listFilter (): string {
-          return this._listFilter;
-      };
-      set listFilter (value: string) {
-          this._listFilter = value;
+        this.filterOption = 'name';
       };
 
       get filteredProducts(): IProduct[] {
@@ -65,7 +60,41 @@ export class ProductListComponent implements OnInit, AfterViewInit{
     onRatingClicked(message: string): void {
         this.ratingMessage = message;
     };
-    ngAfterViewInit(): void {
-        this.filterElementReference.nativeElement.focus();
+    updateListFilter(value: string) {
+        this.listFilter = value;
+    };
+    updateFilterOption(value: string){
+        this.filterOption = value;
     };
 }
+
+
+
+
+
+//private _sub = Subscription;
+    //getSubscription: any;
+/*
+    private _filterInput: NgModel;
+
+    get filterInput(): NgModel {
+        return this._filterInput;
+    }
+
+    @ViewChild(NgModel, {static: false})
+    set filterInput(value: NgModel) {
+        this._filterInput = value;
+        console.log(this.filterInput);
+        if(this.filterInput && !this._sub) {
+            console.log('subscribing');
+            this.getSubscription = this.filterInput.valueChanges.subscribe(
+                () => {
+                    console.log('performed the filter');
+                    //console.log(this.listFilter);
+                }
+            );
+            this._sub = this.getSubscription;
+        }
+    }
+*/
+    
