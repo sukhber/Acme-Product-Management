@@ -7,10 +7,7 @@ import { EventEmitter } from '@angular/core';
 })
 export class FilterComponent implements AfterViewInit {
 
-  @Input() FilterOption: string;
-  @Input() ListFilter: string;
   @Input() displayDetail: boolean;
-
   @Output() updatedFilterOption: EventEmitter<string> = new EventEmitter<string>();
   @Output() updatedListFilter: EventEmitter<string> = new EventEmitter<string>();
 
@@ -24,15 +21,7 @@ export class FilterComponent implements AfterViewInit {
   set hitCount(value: number) {
     this._hitCount = value;
   };
-
-  filterOptionChanged(): void {
-    this.updatedFilterOption.emit(this.FilterOption);
-  }
-
-  listFilterChanged(): void {
-    this.updatedListFilter.emit(this.ListFilter);
-  }
-
+  
   @ViewChild('filterElement', {static: false}) filterElementReference: ElementRef;
 
   ngAfterViewInit(): void {
@@ -45,5 +34,29 @@ export class FilterComponent implements AfterViewInit {
     } else {
       return `Hits: ${this.hitCount}`;
     }
+  };
+
+  private _ListFilter: string;
+  
+  get ListFilter(): string {
+    return this._ListFilter;
+  };
+
+  @Input()
+  set ListFilter(value: string) {
+    this._ListFilter = value;
+    this.updatedListFilter.emit(value);
+  };
+
+  private _FilterOption: string ;
+
+  get FilterOption(): string {
+    return this._FilterOption;
+  };
+
+  @Input()
+  set FilterOption(value: string) {
+    this._FilterOption = value;
+    this.updatedFilterOption.emit(value);
   };
 }

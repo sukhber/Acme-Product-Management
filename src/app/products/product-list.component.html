@@ -7,9 +7,9 @@
         <div class = 'row'>
             <app-filter #filterCriteria
                 class = 'col-md-10' 
-                [FilterOption] = 'filterOption' 
-                [ListFilter] = 'listFilter' 
                 [hitCount] = 'filteredProducts?.length'
+                [ListFilter] = 'listFilter'
+                [FilterOption] = 'filterOption'
                 [displayDetail] = 'includeDetail'
                 (updatedFilterOption) = 'updateFilterOption($event)'
                 (updatedListFilter) = 'updateListFilter($event)'>

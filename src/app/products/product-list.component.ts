@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { IProduct } from './product';
 import { ProductService } from './product.service';
+import { ProductParameterService } from './product-parameter.service';
 
 @Component( {
     templateUrl: './product-list.component.html',
@@ -8,19 +9,15 @@ import { ProductService } from './product.service';
 }
 
 )
-export class ProductListComponent implements OnInit{
+export class ProductListComponent implements OnInit {
 
     pageTitle: string = 'Product List ';
     imageWidth: number = 60;
     imageMargin: number = 5;
-    showImage: boolean = true;
     buttonText: string = 'Hide Image';
     ratingMessage: string;
     errorMessage: string;
     products: IProduct[];
-    includeDetail: boolean = true;
-    filterOption: string;
-    listFilter: string;
     private _filteredProducts: IProduct[];
 
       toggleImage(): void {
@@ -39,10 +36,7 @@ export class ProductListComponent implements OnInit{
               } 
           } );
       };
-      constructor(private productService: ProductService) {
-          this.listFilter = '';
-          this.filterOption = 'name';
-      };
+      constructor(private productService: ProductService, private productParameterService: ProductParameterService) {};
 
     onRatingClicked(message: string): void {
         this.ratingMessage = message;
@@ -50,7 +44,7 @@ export class ProductListComponent implements OnInit{
 
     get filteredProducts(): IProduct[] {
         if(this._filteredProducts) {
-            if (this.filterOption === 'all') {
+            if (this.filterOption === 'none') {
                 return this._filteredProducts;
             }
              else if (this.filterOption === 'name') {
@@ -70,17 +64,33 @@ export class ProductListComponent implements OnInit{
             }
         } 
       };
-
       set filteredProducts(value: IProduct[]) {
           this._filteredProducts = value;
       };
-
     updateFilterOption(value: string) {
-        this.filterOption = value;
+        this.productParameterService.filterOption = value;
     };
-
     updateListFilter(value: string) {
-        this.listFilter = value;
+        this.productParameterService.listFilter = value;
+    };
+    get filterOption(): string {
+        return this.productParameterService.filterOption;
+    };
+    get listFilter(): string {
+        return this.productParameterService.listFilter;
+    };
+    
+    get showImage(): boolean {
+        return this.productParameterService.showImage;
+    };
+    set showImage(value: boolean) {
+        this.productParameterService.showImage = value;
+    };
+    get includeDetail(): boolean {
+        return this.productParameterService.includeDetail;
+    };
+    set includeDetail(value: boolean) {
+        this.productParameterService.includeDetail = value;
     };
 }
 
