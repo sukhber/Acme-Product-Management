@@ -1,7 +1,7 @@
 <div class='row'>
     <div class='col-md-2'>Filter by:</div>
     <div class='col-md-3'>
-        <select [(ngModel)] = 'FilterOption' (change) = 'onFilterOptionChange()'> 
+        <select [(ngModel)] = 'FilterOption' (change) = 'filterOptionChanged()'> 
             <option value = 'all'></option>
             <option value = 'name'>Product Name</option>
             <option value = 'code'>Code</option>
@@ -11,14 +11,14 @@
         </select>
     </div>
     <div class='col-md-4'>
-        <input type='text' #filterElement [(ngModel)] = 'ListFilter' (keyup) = 'onListFilterChange()'/>
+        <input type='text' #filterElement [(ngModel)] = 'ListFilter' (keyup) = 'listFilterChanged()'/>
     </div>
 </div>
 <div class='row'>
-    <div class='col-md-6'>
+    <div class='col-md-6' *ngIf = 'displayDetail'>
         <h5>
             Filtered by: {{ FilterOption | titlecase }}
-            Hits: {{ hitCount }}
+            {{ hitMessage }}
         </h5>
     </div>
 </div>

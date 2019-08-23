@@ -5,14 +5,16 @@
     </div>
     <div class='card-body'>
         <div class = 'row'>
-            <app-filter 
+            <app-filter #filterCriteria
                 class = 'col-md-10' 
                 [FilterOption] = 'filterOption' 
                 [ListFilter] = 'listFilter' 
-                [hitCount] = 'filteredProducts.length'
-                (updatedListFilter) = 'updateListFilter($event)'
-                (updatedFilterOption) = 'updateFilterOption($event)'>
+                [hitCount] = 'filteredProducts?.length'
+                [displayDetail] = 'includeDetail'
+                (updatedFilterOption) = 'updateFilterOption($event)'
+                (updatedListFilter) = 'updateListFilter($event)'>
             </app-filter>
+            {{ filterCriteria.ListFilter }}
         </div>
         <div class='table-responsive'>
             <table class='table' *ngIf = 'products?.length'>
