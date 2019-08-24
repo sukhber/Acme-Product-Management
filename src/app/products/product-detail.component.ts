@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from './product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from './product.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
-  templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+  templateUrl: './product-detail.component.html'
 })
 export class ProductDetailComponent implements OnInit {
 
   pageTitle: string = 'Product Detail';
   product: IProduct | undefined;
   errorMessage: '';
+  headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor( private route: ActivatedRoute, private router: Router, private productService: ProductService) { }
 
