@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProductService } from './product.service';
-import { IProduct } from './product';
 
 @Injectable()
 
@@ -28,5 +27,4 @@ export class ProductDetailGuard implements CanActivate {
       };
       return true;
   }
-  
 }

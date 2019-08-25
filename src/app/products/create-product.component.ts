@@ -9,8 +9,7 @@ import { ProductService } from './product.service';
 export class CreateProductComponent {
 
   product: IProduct;
-  productIds: number[];
-
+  
   constructor( private router: Router, private productService: ProductService) {
     this.product = {} as IProduct;
     productService.initializeProduct(this.product);

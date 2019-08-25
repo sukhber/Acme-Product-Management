@@ -10,7 +10,6 @@ export class ProductService {
 
     private productUrl: string = 'api/products';
     private products: IProduct[];
-    productIds: number[];
     
     getProducts(): Observable<IProduct[]> {
         if (this.products) {
@@ -38,7 +37,7 @@ export class ProductService {
 
       updateProduct(product: IProduct): Observable<IProduct> {
         const headers = new HttpHeaders({'Content-Type': 'application/json' });
-        if ( product.id > Math.max(...this.productIds) ) {
+        if ( product.id === null ) {
             return this.http.post<IProduct>(this.productUrl, product, { headers: headers}).pipe(
                 tap(() => this.products.push(product)),
                 catchError(this.handleError)
@@ -51,15 +50,7 @@ export class ProductService {
       };
 
       initializeProduct(product: IProduct): void {
-        if (this.products) {
-        this.productIds = this.products.map(product => product.id);
-        } else {
-            this.http.get<IProduct[]>(this.productUrl).pipe(
-                tap( data => this.productIds = data.map(product => product.id)),
-                catchError(this.handleError)
-            );
-        }
-        product.id = Math.max(...this.productIds) + 1; 
+        product.id = null; 
         product.description = '';
         product.productCode = '';
         product.productName = '';
