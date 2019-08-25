@@ -39,7 +39,7 @@ export class ProductService {
         const headers = new HttpHeaders({'Content-Type': 'application/json' });
         if ( product.id === null ) {
             return this.http.post<IProduct>(this.productUrl, product, { headers: headers}).pipe(
-                tap(() => this.products.push(product)),
+                tap((data) => this.products.push(data)),
                 catchError(this.handleError)
             );
         }
