@@ -33,16 +33,18 @@ export class ProductEditComponent implements OnInit {
 
   onSave(): void {
     this.productService.updateProduct(this.product)
-    .subscribe((data)=>{
-      console.log(`Product with id: ${this.product.id} updated`)});
-      this.router.navigate(['/products']);
-  };
+    .subscribe (
+      () => {
+        console.log(`Product with id: ${this.product.id} updated`)});
+        this.router.navigate(['/products']);
+      };
 
   onDelete(): void {
     const param = +this.route.snapshot.paramMap.get('id');
-      this.productService.deleteProduct(+this.product.id)
-        .subscribe((data)=>{
+    this.productService.deleteProduct(+this.product.id)
+    .subscribe (
+        () => {
         console.log(`Product with id: ${this.product.id} deleted`)});
-      this.router.navigate(['/products']);
-  };
+        this.router.navigate(['/products']);
+    };
 }
