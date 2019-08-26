@@ -11,9 +11,12 @@ import { ProductDetailGuard } from './product-detail.guard';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ProductData } from './product-data';
 import { CreateProductComponent } from './create-product.component';
+import { ProductShellListComponent } from './product-shell/product-shell-list.component';
+import { ProductShellDetailComponent } from './product-shell/product-shell-detail.component';
+import { ProductShellComponent } from './product-shell/product-shell.component';
 
 @NgModule({
-  declarations: [ProductListComponent, ConvertToSpacesPipe, ProductDetailComponent, ProductEditComponent, CreateProductComponent],
+  declarations: [ProductListComponent, ConvertToSpacesPipe, ProductDetailComponent, ProductEditComponent, CreateProductComponent, ProductShellListComponent, ProductShellDetailComponent, ProductShellComponent],
   imports: [
     SharedModule, ProductRoutingModule, InMemoryWebApiModule.forRoot(ProductData)
   ],

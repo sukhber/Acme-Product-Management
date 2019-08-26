@@ -10,6 +10,7 @@ export class ProductService {
 
     private productUrl: string = 'api/products';
     private products: IProduct[];
+    currentProduct: IProduct | null;
     
     getProducts(): Observable<IProduct[]> {
         if (this.products) {
@@ -39,7 +40,10 @@ export class ProductService {
         const headers = new HttpHeaders({'Content-Type': 'application/json' });
         if ( product.id === null ) {
             return this.http.post<IProduct>(this.productUrl, product, { headers: headers}).pipe(
-                tap((data) => this.products.push(data)),
+                tap((data) => {
+                    this.products.push(data);
+                    this.currentProduct = data;
+                }),
                 catchError(this.handleError)
             );
         }
@@ -68,6 +72,7 @@ export class ProductService {
                 const index = this.products.findIndex( product => product.id === id);
                 if( index > -1) 
                     this.products.splice(index, 1);
+                    this.currentProduct = null;
             }),
             catchError(this.handleError)
         );
