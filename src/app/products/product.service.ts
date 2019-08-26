@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from './product';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, of } from 'rxjs';
+import { Observable, throwError, of, Subject, BehaviorSubject } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 @Injectable()
@@ -10,7 +10,8 @@ export class ProductService {
 
     private productUrl: string = 'api/products';
     private products: IProduct[];
-    currentProduct: IProduct | null;
+    private selectedProduct = new BehaviorSubject<IProduct | null>(null);
+    selectedProductChanges$ = this.selectedProduct.asObservable();
     
     getProducts(): Observable<IProduct[]> {
         if (this.products) {
@@ -22,6 +23,10 @@ export class ProductService {
             catchError(this.handleError)
         );
     };
+
+    updateSelectedProduct(product: IProduct): void {
+        this.selectedProduct.next(product);
+    }
 
     getProduct(id: number): Observable<IProduct> {
         if(this.products) {
@@ -42,7 +47,7 @@ export class ProductService {
             return this.http.post<IProduct>(this.productUrl, product, { headers: headers}).pipe(
                 tap((data) => {
                     this.products.push(data);
-                    this.currentProduct = data;
+                    this.selectedProduct.next(data);
                 }),
                 catchError(this.handleError)
             );
@@ -72,7 +77,7 @@ export class ProductService {
                 const index = this.products.findIndex( product => product.id === id);
                 if( index > -1) 
                     this.products.splice(index, 1);
-                    this.currentProduct = null;
+                    this.selectedProduct.next(null);
             }),
             catchError(this.handleError)
         );

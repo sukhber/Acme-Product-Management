@@ -1,13 +1,14 @@
-<div class = 'card'  *ngIf = 'products?.length'>
+<div class = 'card'  *ngIf = 'products?.length'  style = 'border-color: #0062cc'>
     <div class = 'card-header' style = "background-color: #0062cc; color: #ffffff">
         {{ pageTitle }}
     </div>
 
-    <div class='card-body' style = 'padding: 0'>
+    <div class='card-body'>
         <div class = 'list-group'>
             <button type = 'button'
                     class = 'list-group-item'
                     *ngFor = 'let product of products'
+                    [ngClass] = "{'active': product?.id === selectedProduct?.id}"
                     (click) = 'displaySelectedProduct(product)'>
                 {{ product.productName }} ({{ product.productCode }})
             </button>
