@@ -44,7 +44,10 @@ export class ProductEditComponent implements OnInit {
     this.productService.deleteProduct(+this.product.id)
     .subscribe (
         () => {
-        console.log(`Product with id: ${this.product.id} deleted`)});
-        this.router.navigate(['/products']);
+          console.log(`Product with id: ${this.product.id} deleted`);
+          alert('Are you sure to delete this product !!!!');
+          this.router.navigate(['/products']);
+        });
+        
     };
 }
