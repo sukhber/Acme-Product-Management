@@ -9,7 +9,7 @@ import { CreateProductComponent } from './create-product.component';
 import { ProductShellComponent } from './product-shell/product-shell.component';
 
 const routes: Routes = [
-  { path: 'products', component: ProductShellComponent },
+  { path: 'products', component: ProductListComponent },
   { path: 'products/:id',
     canActivate: [ProductDetailGuard],
     component: ProductDetailComponent },

@@ -25,7 +25,9 @@ export class FilterComponent implements AfterViewInit {
   @ViewChild('filterElement', {static: false}) filterElementReference: ElementRef;
 
   ngAfterViewInit(): void {
-    this.filterElementReference.nativeElement.focus();
+    if (this.filterElementReference.nativeElement) {
+      this.filterElementReference.nativeElement.focus();
+    }
   };
 
   get hitMessage(): string {
