@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from  '@angular/common/http';
 import { WelcomeComponent } from './home/welcome.component';
 import { ProductModule } from './products/product.module';
+import { PageNotFoundComponent } from './home/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule, 
