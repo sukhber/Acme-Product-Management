@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   userName: string;
-  constructor(private authorizationService: AuthorizationService, private router: Router) {}
+  constructor(private authorizationService: AuthorizationService, private router: Router) {
+    
+  }
 
   onLogin(): void {
     this.authorizationService.setIsLoggedIn(true);
