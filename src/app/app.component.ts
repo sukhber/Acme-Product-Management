@@ -10,18 +10,11 @@ import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 export class AppComponent implements OnInit {
 
   pageTitle: string = 'Acme Product Management';
-  
-  
 
-  userName: string | null;
-  isLoggedIn: boolean | null;
+  userName: string;
+  isLoggedIn: boolean;
 
-
-
-  constructor(private authorizationService: AuthorizationService, private router: Router) {
-    this.isLoggedIn = false;
-    this.userName = '';
-  }
+  constructor(private authorizationService: AuthorizationService, private router: Router) {}
 
   ngOnInit(): void {
     this.authorizationService.userNameChanges$.subscribe(
@@ -36,6 +29,5 @@ export class AppComponent implements OnInit {
     alert('You are successfully logged out !!!!');
     this.authorizationService.setIsLoggedIn(false);
     this.router.navigate(['/welcome']);
-  }
-  
+  } 
 }

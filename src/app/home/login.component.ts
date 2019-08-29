@@ -5,9 +5,9 @@ import { Router } from '@angular/router';
 @Component({
   templateUrl: './login.component.html'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
-  userName: string = '';
+  userName: string;
   constructor(private authorizationService: AuthorizationService, private router: Router) {}
 
   onLogin(): void {
@@ -18,6 +18,12 @@ export class LoginComponent {
 
   onCancel(): void {
     this.router.navigate(['/welcome']);
+  }
+
+  ngOnInit(): void {
+    this.authorizationService.userNameChanges$.subscribe(
+      userName => this.userName = userName
+    );
   }
 
 }

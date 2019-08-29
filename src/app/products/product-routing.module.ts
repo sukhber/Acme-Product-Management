@@ -7,17 +7,20 @@ import { ProductDetailComponent } from './product-detail.component';
 import { ProductEditComponent } from './product-edit.component';
 import { CreateProductComponent } from './create-product.component';
 import { ProductShellComponent } from './product-shell/product-shell.component';
+import { UserAccessGuard } from './user-access.guard';
 
 const routes: Routes = [
-  { path: 'products',   
-    canActivate: [ProductDetailGuard],
+  { path: 'products',
+    canActivate: [UserAccessGuard],
     component: ProductListComponent },
   { path: 'products/:id',
+    canActivate: [ProductDetailGuard],
     component: ProductDetailComponent },
   { path: 'products/:id/edit',
+    canActivate: [ProductDetailGuard],
     component: ProductEditComponent },
   { path: 'addProduct',
-    canActivate: [ProductDetailGuard],  
+    canActivate: [UserAccessGuard],
     component: CreateProductComponent }
 ];
 

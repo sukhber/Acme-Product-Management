@@ -21,7 +21,7 @@ export class ProductListComponent implements OnInit {
     errorMessage: string;
     products: IProduct[];
     private _filteredProducts: IProduct[];
-    isLoggedIn: boolean;
+    //isLoggedIn: boolean;
 
       toggleImage(): void {
           this.showImage = !this.showImage;
@@ -39,17 +39,7 @@ export class ProductListComponent implements OnInit {
               } 
           } );
       };
-      constructor(private router: Router, private productService: ProductService, private productParameterService: ProductParameterService, private authorizationService: AuthorizationService) {
-       
-       /* authorizationService.isLoggedInChanges$.subscribe(
-            isLoggedIn => this.isLoggedIn = isLoggedIn
-          );
-          if (this.isLoggedIn === false) {
-            alert('Kindly login to continue !!!!!');
-            this.router.navigate(['/welcome']);
-          }
-          */
-      };
+      constructor(private router: Router, private productService: ProductService, private productParameterService: ProductParameterService, private authorizationService: AuthorizationService) {};
 
     onRatingClicked(message: string): void {
         this.ratingMessage = message;

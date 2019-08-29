@@ -1,31 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduct } from './product';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Router } from '@angular/router';
 import { ProductService } from './product.service';
-import { Observable } from 'rxjs';
 import { AuthorizationService } from '../home/authorization.service';
 
 @Component({
   templateUrl: './create-product.component.html'
 })
-export class CreateProductComponent {
-  
+export class CreateProductComponent implements OnInit{
 
   product: IProduct;
-  isLoggedIn: boolean;
+  //isLoggedIn: boolean;
   
   constructor( private router: Router, private productService: ProductService, private authorizationService: AuthorizationService) {
-    //authorizationService.isLoggedInChanges$.subscribe(
-      //isLoggedIn => this.isLoggedIn = isLoggedIn
-    //);
-    //if (this.isLoggedIn) {
       this.product = {} as IProduct;
-      productService.initializeProduct(this.product);
-   // } else {
-      //alert('Kindly login to continue !!!!!');
-      //this.router.navigate(['/welcome']);
-    //}
-    
+      productService.initializeProduct(this.product);  
   }
 
   onSave(): void {
@@ -39,5 +28,8 @@ export class CreateProductComponent {
 
   onCancel(): void {
     this.router.navigate(['/products']);
+  };
+
+  ngOnInit(): void {
   };
 }
