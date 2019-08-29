@@ -1,0 +1,25 @@
+<div class = 'card' style = 'border-color: #0062cc'>
+        <div class = 'card-header' style = "background-color: #0062cc; color: #ffffff">
+            Log In
+        </div>
+        <div class = 'card-body'> 
+            <div class = 'row'>
+                <div class = 'col-md-8'>
+                    <div class = 'row'>
+                        <div class = 'col-md-4'>*User Name: </div>
+                        <div class = 'col-md-8'><input type='text' placeholder="userName (required)" [(ngModel)] = 'userName' style = 'margin-bottom: 10px; width: 500px; padding: 5px' required /></div>
+                    </div>
+                    <div class = 'row'>
+                        <div class = 'col-md-4'>*Password: </div>
+                        <div class = 'col-md-8'><input type='text' placeholder="password (required)" style = 'margin-bottom: 10px; width: 500px; padding: 5px' required /></div>
+                    </div>
+                    <div class = 'row' style = 'margin-top: 10px'>
+                        <div class = 'col-md-8'>
+                            <button class = 'btn btn-primary' style = 'width: 80px; margin-right: 16px' (click) = 'onLogin()'>Log In</button>
+                            <button class = 'btn btn-outline-secondary' style = 'width: 80px; margin-right: 16px' (click) = 'onCancel()'>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -9,14 +9,16 @@ import { CreateProductComponent } from './create-product.component';
 import { ProductShellComponent } from './product-shell/product-shell.component';
 
 const routes: Routes = [
-  { path: 'products', component: ProductListComponent },
-  { path: 'products/:id',
+  { path: 'products',   
     canActivate: [ProductDetailGuard],
+    component: ProductListComponent },
+  { path: 'products/:id',
     component: ProductDetailComponent },
   { path: 'products/:id/edit',
-    canActivate: [ProductDetailGuard],
     component: ProductEditComponent },
-    { path: 'addProduct', component: CreateProductComponent }
+  { path: 'addProduct',
+    canActivate: [ProductDetailGuard],  
+    component: CreateProductComponent }
 ];
 
 @NgModule({

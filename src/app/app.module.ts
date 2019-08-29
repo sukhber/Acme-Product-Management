@@ -6,20 +6,25 @@ import { HttpClientModule } from  '@angular/common/http';
 import { WelcomeComponent } from './home/welcome.component';
 import { ProductModule } from './products/product.module';
 import { PageNotFoundComponent } from './home/page-not-found.component';
+import { LoginComponent } from './home/login.component';
+import { AuthorizationService } from './home/authorization.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule, 
     HttpClientModule,
     ProductModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [AuthorizationService],
   bootstrap: [AppComponent]
 })
 

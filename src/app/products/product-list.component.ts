@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from './product';
 import { ProductService } from './product.service';
 import { ProductParameterService } from './product-parameter.service';
+import { AuthorizationService } from '../home/authorization.service';
+import { Router } from '@angular/router';
 
 @Component( {
     templateUrl: './product-list.component.html',
@@ -19,6 +21,7 @@ export class ProductListComponent implements OnInit {
     errorMessage: string;
     products: IProduct[];
     private _filteredProducts: IProduct[];
+    isLoggedIn: boolean;
 
       toggleImage(): void {
           this.showImage = !this.showImage;
@@ -36,7 +39,17 @@ export class ProductListComponent implements OnInit {
               } 
           } );
       };
-      constructor(private productService: ProductService, private productParameterService: ProductParameterService) {};
+      constructor(private router: Router, private productService: ProductService, private productParameterService: ProductParameterService, private authorizationService: AuthorizationService) {
+       
+       /* authorizationService.isLoggedInChanges$.subscribe(
+            isLoggedIn => this.isLoggedIn = isLoggedIn
+          );
+          if (this.isLoggedIn === false) {
+            alert('Kindly login to continue !!!!!');
+            this.router.navigate(['/welcome']);
+          }
+          */
+      };
 
     onRatingClicked(message: string): void {
         this.ratingMessage = message;

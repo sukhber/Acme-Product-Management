@@ -1,22 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthorizationService } from './home/authorization.service';
+import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 
 @Component({
   selector: 'pm-root',
-  template: `
-    <nav class = 'navbar navbar-expand navbar-light bg-light'>
-      <a class = 'navbar-brand'>{{pageTitle}}</a>
-      <ul class = 'nav nav-pills'>
-        <li><a class = 'nav-link' [routerLink] = "['/welcome']">Home</a></li>
-        <li><a class = 'nav-link' [routerLink] = "['/products']">Product List</a></li>
-        <li><a class = 'nav-link' [routerLink] = "['/addProduct']">Add Product</a>
-      </ul>
-    </nav>
-    <div class = 'container'>
-      <router-outlet></router-outlet>
-    </div>
-  `
+  templateUrl: './app.component.html'
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
+
   pageTitle: string = 'Acme Product Management';
+  
+  
+
+  userName: string | null;
+  isLoggedIn: boolean | null;
+
+
+
+  constructor(private authorizationService: AuthorizationService, private router: Router) {
+    this.isLoggedIn = false;
+    this.userName = '';
+  }
+
+  ngOnInit(): void {
+    this.authorizationService.userNameChanges$.subscribe(
+      userName => this.userName = userName
+    );
+    this.authorizationService.isLoggedInChanges$.subscribe(
+      isLoggedIn => this.isLoggedIn = isLoggedIn
+    );
+  }
+
+  logOut(): void {
+    alert('You are successfully logged out !!!!');
+    this.authorizationService.setIsLoggedIn(false);
+    this.router.navigate(['/welcome']);
+  }
+  
 }
