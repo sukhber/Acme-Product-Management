@@ -49,14 +49,14 @@ export class ProductListComponent implements OnInit {
     get filteredProducts(): IProduct[] {
 
         if (this._filteredProducts) {
-            if (this.route.snapshot.paramMap.get('name')) {
+            if (this.route.snapshot.queryParamMap.get('name')) {
             return this._filteredProducts.filter (
                 product => {
-                        const nameCheck = product.productName === this.route.snapshot.paramMap.get('name');
-                        const codeCheck = product.productCode === this.route.snapshot.paramMap.get('code');
+                        const nameCheck = product.productName.toLocaleLowerCase() === this.route.snapshot.queryParamMap.get('name').toLocaleLowerCase();
+                        const codeCheck = product.productCode.toLocaleLowerCase() === this.route.snapshot.queryParamMap.get('code').toLocaleLowerCase();
                         const date = new Date(product.releaseDate);
-                        const start = new Date(this.route.snapshot.paramMap.get('startDate'));
-                        const end = new Date(this.route.snapshot.paramMap.get('endDate'));
+                        const start = new Date(this.route.snapshot.queryParamMap.get('startDate'));
+                        const end = new Date(this.route.snapshot.queryParamMap.get('endDate'));
                         const dateCheck = date >= start && date <= end;  
                         return (nameCheck && codeCheck && dateCheck);
                 }    
