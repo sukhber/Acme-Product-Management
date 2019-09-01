@@ -1,0 +1,36 @@
+<div class = 'card' style = 'border-color: #0062cc'>
+    <div class = 'card-header' style = "background-color: #0062cc; color: #ffffff">
+        Search
+    </div>
+    <div class = 'card-body'> 
+        <div class = 'row'>
+            <div class = 'col-md-8'>
+                <div class = 'row'>
+                    <div class = 'col-md-4'>*Product Name: </div>
+                    <div class = 'col-md-8'><input type='text' placeholder="Name(required)" [(ngModel)] = 'productName' style = 'margin-bottom: 10px; width: 500px; padding: 5px' required /></div>
+                </div>
+                <div class = 'row'>
+                    <div class = 'col-md-4'>*Product Code: </div>
+                    <div class = 'col-md-8'><input type='text' placeholder="Code(required)" [(ngModel)] = 'productCode' style = 'margin-bottom: 10px; width: 500px; padding: 5px' required /></div>
+                </div>
+                <div class = 'row'>
+                    <div class = 'col-md-4' style = 'margin-bottom: 10px;'>Availability Date Range</div>
+                </div>
+                <div class = 'row'>
+                    <div class = 'col-md-4'>*Start: </div>
+                    <div class = 'col-md-8'><input type='date' placeholder="Date(required)" [(ngModel)] = 'startDate' style = 'margin-bottom: 10px; width: 500px; padding: 5px' required /></div>
+                </div>
+                <div class = 'row'>
+                    <div class = 'col-md-4'>*End: </div>
+                    <div class = 'col-md-8'><input type='date' placeholder="Date(required)" [(ngModel)] = 'endDate' style = 'margin-bottom: 10px; width: 500px; padding: 5px' required /></div>
+                </div>
+                <div class = 'row'>
+                    <div class = 'col-md-8'>
+                        <button class = 'btn btn-primary' style = 'width: 80px; margin-right: 16px' (click) = 'onSearch()'>Search</button>
+                        <button class = 'btn btn-outline-secondary' style = 'width: 80px; margin-right: 16px' (click) = 'onCancel()'>Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

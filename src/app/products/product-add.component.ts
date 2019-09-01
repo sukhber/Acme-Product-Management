@@ -5,9 +5,9 @@ import { ProductService } from './product.service';
 import { AuthorizationService } from '../home/authorization.service';
 
 @Component({
-  templateUrl: './create-product.component.html'
+  templateUrl: './product-add.component.html'
 })
-export class CreateProductComponent implements OnInit{
+export class ProductAddComponent implements OnInit{
 
   product: IProduct;
   //isLoggedIn: boolean;

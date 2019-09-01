@@ -5,7 +5,7 @@ export class ProductParameterService {
 
   showImage: boolean = true;
   includeDetail: boolean = true;
-  filterOption: string = 'name';
+  filterOption: string = 'none';
   listFilter: string = '';
 
   constructor() { }

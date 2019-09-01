@@ -5,9 +5,10 @@ import { ProductListComponent } from './product-list.component';
 import { ProductDetailGuard } from './product-detail.guard';
 import { ProductDetailComponent } from './product-detail.component';
 import { ProductEditComponent } from './product-edit.component';
-import { CreateProductComponent } from './create-product.component';
+import { ProductAddComponent } from './product-add.component';
 import { ProductShellComponent } from './product-shell/product-shell.component';
 import { UserAccessGuard } from './user-access.guard';
+import { ProductSearchComponent } from './product-search.component';
 
 const routes: Routes = [
   { path: 'products',
@@ -21,7 +22,10 @@ const routes: Routes = [
     component: ProductEditComponent },
   { path: 'addProduct',
     canActivate: [UserAccessGuard],
-    component: CreateProductComponent }
+    component: ProductAddComponent },
+  { path: 'searchProduct',
+    canActivate: [UserAccessGuard],
+    component: ProductSearchComponent }
 ];
 
 @NgModule({

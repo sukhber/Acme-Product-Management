@@ -3,7 +3,7 @@ import { IProduct } from './product';
 import { ProductService } from './product.service';
 import { ProductParameterService } from './product-parameter.service';
 import { AuthorizationService } from '../home/authorization.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component( {
     templateUrl: './product-list.component.html',
@@ -36,17 +36,32 @@ export class ProductListComponent implements OnInit {
               },
               error: err => {
                   this.errorMessage = err;
-              } 
-          } );
-      };
-      constructor(private router: Router, private productService: ProductService, private productParameterService: ProductParameterService, private authorizationService: AuthorizationService) {};
+              }
+          }
+        );
+    };
+      constructor(private router: Router, private productService: ProductService, private productParameterService: ProductParameterService, private authorizationService: AuthorizationService, private route: ActivatedRoute) {};
 
     onRatingClicked(message: string): void {
         this.ratingMessage = message;
     };
 
     get filteredProducts(): IProduct[] {
-        if(this._filteredProducts) {
+
+        if (this._filteredProducts) {
+            if (this.route.snapshot.paramMap.get('name')) {
+            return this._filteredProducts.filter (
+                product => {
+                        const nameCheck = product.productName === this.route.snapshot.paramMap.get('name');
+                        const codeCheck = product.productCode === this.route.snapshot.paramMap.get('code');
+                        const date = new Date(product.releaseDate);
+                        const start = new Date(this.route.snapshot.paramMap.get('startDate'));
+                        const end = new Date(this.route.snapshot.paramMap.get('endDate'));
+                        const dateCheck = date >= start && date <= end;  
+                        return (nameCheck && codeCheck && dateCheck);
+                }    
+            );
+        }
             if (this.filterOption === 'none') {
                 return this._filteredProducts;
             }

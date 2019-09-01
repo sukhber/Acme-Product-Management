@@ -17,12 +17,19 @@ export class ProductDetailComponent implements OnInit {
   constructor( private route: ActivatedRoute, private router: Router, private productService: ProductService) { }
 
   ngOnInit() {
-
+    this.route.paramMap.subscribe(
+      params => {
+        const id = +params.get('id');
+        this.getProduct(id);  
+      }
+    );
+/*
     const param = +this.route.snapshot.paramMap.get('id');
     if( param ) {
       const id = +param;
       this.getProduct(id);
     }
+    */
   }
 
   getProduct(id: number): void {
