@@ -1,31 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from './product';
+import { IProduct, IProductResolved } from './product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from './product.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   templateUrl: './product-edit.component.html'
 })
 export class ProductEditComponent implements OnInit {
-  pageTitle: string = 'Edit Product';
+  pageTitle: string = this.route.snapshot.data['pageTitle'];
   product: IProduct;
   errorMessage: '';
   constructor( private route: ActivatedRoute, private router: Router, private productService: ProductService) {}
 
   ngOnInit() {
-    const param = +this.route.snapshot.paramMap.get('id');
+    /*const param = +this.route.snapshot.paramMap.get('id');
     if( param ) {
       const id = +param;
       this.getProduct(id);
-    }
+    }*/
+    this.route.data.subscribe( data => {
+      const resolvedProduct: IProductResolved = data['productResolved'];
+      this.product = resolvedProduct.product;
+      this.errorMessage = resolvedProduct.error;
+      }
+    )
   }
 
-  getProduct(id: number): void {
+  /*getProduct(id: number): void {
     this.productService.getProduct(id).subscribe({
       next : product => this.product = product, 
       error : err => this.errorMessage = err
     });
-  };
+  };*/
 
   onCancel(): void {
     this.router.navigate(['/products']);

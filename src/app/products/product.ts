@@ -8,3 +8,13 @@ export interface IProduct {
     "starRating": number,
     "imageUrl": string
 }
+
+export interface IProductResolved {
+    "product": IProduct,
+    "error"?: any
+}
+
+export interface IProductListResolved {
+    "products": IProduct[],
+    "error"?: any
+}

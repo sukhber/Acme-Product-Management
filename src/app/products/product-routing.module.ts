@@ -9,17 +9,23 @@ import { ProductAddComponent } from './product-add.component';
 import { ProductShellComponent } from './product-shell/product-shell.component';
 import { UserAccessGuard } from './user-access.guard';
 import { ProductSearchComponent } from './product-search.component';
+import { ProductListResolverService } from './product-list-resolver.service';
+import { ProductResolverService } from './product-resolver.service';
 
 const routes: Routes = [
   { path: 'products',
     canActivate: [UserAccessGuard],
-    component: ProductListComponent },
+    component: ProductListComponent,
+    resolve: {productListResolved: ProductListResolverService} },
   { path: 'products/:id',
-    canActivate: [ProductDetailGuard],
-    component: ProductDetailComponent },
+    //canActivate: [ProductDetailGuard],
+    component: ProductDetailComponent,
+    resolve: {productResolved: ProductResolverService} },
   { path: 'products/:id/edit',
-    canActivate: [ProductDetailGuard],
-    component: ProductEditComponent },
+    //canActivate: [ProductDetailGuard],
+    component: ProductEditComponent,
+    data: {pageTitle: 'Edit Product'},
+    resolve: {productResolved: ProductResolverService} },
   { path: 'addProduct',
     canActivate: [UserAccessGuard],
     component: ProductAddComponent },

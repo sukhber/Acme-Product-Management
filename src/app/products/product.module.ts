@@ -16,13 +16,15 @@ import { ProductShellDetailComponent } from './product-shell/product-shell-detai
 import { ProductShellComponent } from './product-shell/product-shell.component';
 import { UserAccessGuard } from './user-access.guard';
 import { ProductSearchComponent } from './product-search.component';
+import { ProductListResolverService } from './product-list-resolver.service';
+import { ProductResolverService } from './product-resolver.service';
 
 @NgModule({
   declarations: [ProductListComponent, ConvertToSpacesPipe, ProductDetailComponent, ProductEditComponent, ProductAddComponent, ProductShellListComponent, ProductShellDetailComponent, ProductShellComponent, ProductSearchComponent],
   imports: [
     SharedModule, ProductRoutingModule, InMemoryWebApiModule.forRoot(ProductData)
   ],
-  providers: [ProductParameterService, ProductService, ProductDetailGuard, UserAccessGuard]
+  providers: [ProductParameterService, ProductService, ProductDetailGuard, UserAccessGuard, ProductListResolverService, ProductResolverService]
 })
 
 export class ProductModule { }

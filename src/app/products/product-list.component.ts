@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from './product';
+import { IProduct, IProductListResolved } from './product';
 import { ProductService } from './product.service';
 import { ProductParameterService } from './product-parameter.service';
 import { AuthorizationService } from '../home/authorization.service';
@@ -29,7 +29,7 @@ export class ProductListComponent implements OnInit {
       };
 
       ngOnInit(): void {
-          this.productService.getProducts().subscribe( {
+          /*this.productService.getProducts().subscribe( {
               next: products => {
                 this.products = products;
                 this.filteredProducts = this.products;
@@ -38,7 +38,11 @@ export class ProductListComponent implements OnInit {
                   this.errorMessage = err;
               }
           }
-        );
+        );*/
+        const resolvedProductList: IProductListResolved = this.route.snapshot.data['productListResolved'];
+        this.products = resolvedProductList.products;
+        this.filteredProducts = this.products;
+        this.errorMessage = resolvedProductList.error;
     };
       constructor(private router: Router, private productService: ProductService, private productParameterService: ProductParameterService, private authorizationService: AuthorizationService, private route: ActivatedRoute) {};
 
