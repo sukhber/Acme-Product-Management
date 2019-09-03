@@ -11,6 +11,8 @@ import { UserAccessGuard } from './user-access.guard';
 import { ProductSearchComponent } from './product-search.component';
 import { ProductListResolverService } from './product-list-resolver.service';
 import { ProductResolverService } from './product-resolver.service';
+import { ProductEditInfoComponent } from './product-edit-info.component';
+import { ProductEditTagsComponent } from './product-edit-tags.component';
 
 const routes: Routes = [
   { path: 'products',
@@ -25,7 +27,22 @@ const routes: Routes = [
     //canActivate: [ProductDetailGuard],
     component: ProductEditComponent,
     data: {pageTitle: 'Edit Product'},
-    resolve: {productResolved: ProductResolverService} },
+    resolve: {productResolved: ProductResolverService},
+    children: [
+      { 
+        path: '',
+        redirectTo: 'info',
+        pathMatch: 'full'
+      },
+      { 
+        path: 'info',
+        component: ProductEditInfoComponent
+      },
+      { 
+        path: 'tags',
+        component: ProductEditTagsComponent
+      }
+    ] },
   { path: 'addProduct',
     canActivate: [UserAccessGuard],
     component: ProductAddComponent },
