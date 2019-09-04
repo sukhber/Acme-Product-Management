@@ -19,10 +19,9 @@ import { ProductSearchComponent } from './product-search.component';
 import { ProductListResolverService } from './product-list-resolver.service';
 import { ProductResolverService } from './product-resolver.service';
 import { ProductEditInfoComponent } from './product-edit-info.component';
-import { ProductEditTagsComponent } from './product-edit-tags.component';
 
 @NgModule({
-  declarations: [ProductListComponent, ConvertToSpacesPipe, ProductDetailComponent, ProductEditComponent, ProductAddComponent, ProductShellListComponent, ProductShellDetailComponent, ProductShellComponent, ProductSearchComponent, ProductEditInfoComponent, ProductEditTagsComponent],
+  declarations: [ProductListComponent, ConvertToSpacesPipe, ProductDetailComponent, ProductEditComponent, ProductAddComponent, ProductShellListComponent, ProductShellDetailComponent, ProductShellComponent, ProductSearchComponent, ProductEditInfoComponent],
   imports: [
     SharedModule, ProductRoutingModule, InMemoryWebApiModule.forRoot(ProductData)
   ],
