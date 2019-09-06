@@ -30,11 +30,6 @@ const routes: Routes = [
     children: 
     [
       { 
-        path: '',
-        redirectTo: 'info',
-        pathMatch: 'full'
-      },
-      { 
         path: 'info',
         component: ProductEditInfoComponent
       }

@@ -10,6 +10,7 @@ export class ProductSearchComponent {
   productCode: string = this.route.snapshot.queryParamMap.get('code');
   startDate: string = this.route.snapshot.queryParamMap.get('startDate');
   endDate: string = this.route.snapshot.queryParamMap.get('endDate');
+  dataIsValid: boolean = false;
 
   constructor (private router: Router, private route: ActivatedRoute) {
     /*this.productName = null;
@@ -21,6 +22,15 @@ export class ProductSearchComponent {
   onCancel(): void {
     this.router.navigate(['/welcome']);
   }
+
+  validate(): boolean {
+    if (!this.productName || !this.productCode || !this.startDate || !this.endDate) {
+      this.dataIsValid = false;
+    } else {
+      this.dataIsValid = true;
+    }
+    return this.dataIsValid;
+  };
 
   /*onSearch(): void {
     this.router.navigate(

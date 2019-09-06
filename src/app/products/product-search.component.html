@@ -26,7 +26,7 @@
                 </div>
                 <div class = 'row'>
                     <div class = 'col-md-8'>
-                        <button class = 'btn btn-primary' style = 'width: 80px; margin-right: 16px' [routerLink] = "['/products']" [queryParams] = "{ name: productName, code: productCode, startDate: startDate, endDate: endDate }">Search</button>
+                        <button class = 'btn btn-primary' style = 'width: 80px; margin-right: 16px' [routerLink] = "['/products']" [queryParams] = "{ name: productName, code: productCode, startDate: startDate, endDate: endDate }" [disabled] = '!validate()'>Search</button>
                         <button class = 'btn btn-outline-secondary' style = 'width: 80px; margin-right: 16px' (click) = 'onCancel()'>Cancel</button>
                     </div>
                 </div>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct, IProductResolved } from './product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from './product.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   templateUrl: './product-edit.component.html'
@@ -10,7 +9,8 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class ProductEditComponent implements OnInit {
   pageTitle: string = this.route.snapshot.data['pageTitle'];
   product: IProduct;
-  errorMessage: '';
+  errorMessage:string = '';
+  dataIsValid: boolean = false;
   constructor( private route: ActivatedRoute, private router: Router, private productService: ProductService) {}
 
   ngOnInit() {
@@ -38,13 +38,13 @@ export class ProductEditComponent implements OnInit {
     this.router.navigate(['/products']);
   };
 
-  onSave(): void {
-    this.productService.updateProduct(this.product)
+  onSave(): void { 
+      this.productService.updateProduct(this.product)
     .subscribe (
       () => {
         console.log(`Product with id: ${this.product.id} updated`)});
         this.router.navigate(['/products']);
-      };
+    }
 
   onDelete(): void {
     const param = +this.route.snapshot.paramMap.get('id');
@@ -56,5 +56,14 @@ export class ProductEditComponent implements OnInit {
           this.router.navigate(['/products']);
         });
         
+    };
+
+    validate(): boolean {
+      if (!this.product.productName || !this.product.productCode) {
+        this.dataIsValid = false;
+      } else {
+        this.dataIsValid = true;
+      }
+      return this.dataIsValid;
     };
 }

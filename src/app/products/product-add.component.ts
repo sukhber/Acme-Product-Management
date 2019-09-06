@@ -10,6 +10,7 @@ import { AuthorizationService } from '../home/authorization.service';
 export class ProductAddComponent implements OnInit{
 
   product: IProduct;
+  dataIsValid: boolean = false;
   //isLoggedIn: boolean;
   
   constructor( private router: Router, private productService: ProductService, private authorizationService: AuthorizationService) {
@@ -31,5 +32,14 @@ export class ProductAddComponent implements OnInit{
   };
 
   ngOnInit(): void {
+  };
+
+  validate(): boolean {
+    if (!this.product.productName || !this.product.productCode || !this.product.releaseDate || !this.product.price) {
+      this.dataIsValid = false;
+    } else {
+      this.dataIsValid = true;
+    }
+    return this.dataIsValid;
   };
 }
